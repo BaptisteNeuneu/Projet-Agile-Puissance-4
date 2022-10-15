@@ -1,8 +1,11 @@
-package fr.iut.fontainebleau.info.but2.groupe2A.fouche;
+package fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 
-public class Gestionnaie{
+import java.awt.*;
+import javax.swing.*;
+
+public class Gestionnaire{
     private GridBagLayout gestionnaire;
-    public Gestionnaire(int x,int y){
+    public Gestionnaire(){
         this.gestionnaire = new GridBagLayout();
     }
     public GridBagLayout getLayout(){
