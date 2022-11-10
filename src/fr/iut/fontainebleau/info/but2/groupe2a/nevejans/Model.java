@@ -1,9 +1,9 @@
 package src.fr.iut.fontainebleau.info.but2.groupe2a.nevejans;
 
-import javax.swing.JOptionPane;
-import javax.swing.Popup;
+//import javax.swing.JOptionPane;
+//import javax.swing.Popup;
 import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
-import src.fr.iut.fontainebleau.info.but2.groupe2a.fouche.*;
+//import src.fr.iut.fontainebleau.info.but2.groupe2a.fouche.*;
 
 public class Model{
     char value;
@@ -13,7 +13,7 @@ public class Model{
 
 
     Jeton[][] grille = new Jeton[grilleLength][grilleHeigth];
-    grille.getGrille(); 
+    //grille.getGrille(); 
     /**
      * Affiche la victoire du joueur
      * si c'est la victoire de la première partie lance la deuxième
@@ -22,7 +22,7 @@ public class Model{
      */
 
     private void Popup(int numerojoueur){
-        JOptionPane.showMessageDialog(fenetre,"Vicoire du joueur " + numerojoueur);
+        //JOptionPane.showMessageDialog(fenetre,"Vicoire du joueur " + numerojoueur);
         if(victoire == true){
             System.out.println("lancement partie 2");
             //Partie2(numerojoueur);
@@ -122,33 +122,6 @@ public class Model{
             cy--;
         }
     }
-    
-    private void CoupLegal(int colonne){
-        int count = 0;
-        for (int i = 0; i < 6; i++) {
-            if (grille[colonne][i].getValue() == value) count++; else count = 0;
-            if (count == 6) {
-
-            }
-        }
-    }    
-
-    private void JouerCoup(int colonne,int ligne,int numerojoueur){
-        switch(numerojoueur){
-
-            case 1:
-                value = 'r';
-                break;
-
-            case 2:
-                value = 'j';
-                break;
-
-            case 3:
-                value = 'v';
-                break;
-        }
-        grille[colonne][ligne].setValue(value);
-    }
+       
 } 
 
