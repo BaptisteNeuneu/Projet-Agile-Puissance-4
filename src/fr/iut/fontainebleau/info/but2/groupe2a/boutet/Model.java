@@ -2,8 +2,8 @@ package src.fr.iut.fontainebleau.info.but2.groupe2a.boutet;
 
 public class Model {
     /* Taille légale de la grille (selon les règles) */
-    protected int grilleLength = 6; // rows
-    protected int grilleHeigth = 7; // collumns
+    protected int grilleLength = 7; // rows
+    protected int grilleHeigth = 6; // collumns
 
     /* Création de la grille avec les dimensions règlementaire */
     protected char grille[][] = new char[grilleLength][grilleHeigth];
@@ -28,7 +28,7 @@ public class Model {
     /**
      * Affiche la grille dans le terminal
      */
-    private void PrintGrille() {
+    public void PrintGrille() {
         System.out.println("La grile :");
         for (int i = 0; i < grilleLength; i++) {
             for (int j = 0; j < grilleHeigth; j++) {
@@ -39,16 +39,15 @@ public class Model {
     }
 
     /* ------- GETTEURS ------- */
-    protected int getGrilleLength() {
-        PrintGrille();
+    public int getGrilleLength() {
         return this.grilleLength;
     }
 
-    protected int getGrilleHeigth() {
+    public int getGrilleHeigth() {
         return this.grilleHeigth;
     }
 
-    protected char[][] getGrille() {
+    public char[][] getGrille() {
         return this.grille;
     }
 }
