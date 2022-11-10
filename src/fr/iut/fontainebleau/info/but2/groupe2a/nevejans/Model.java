@@ -122,6 +122,21 @@ public class Model{
             cy--;
         }
     }
+
+    public void CheckNull(int colonne,int ligne){
+        char a = '-';
+        for(int x=0; x <= colonne; x++){
+            for(int y=0;y<= ligne;y++){
+                if(grille[x][y].getValue() == a){
+                    return;
+                }
+                else {
+                    System.out.println("La partie est null");
+                    //Popup2();
+                }
+            }
+        }
+    }
        
 } 
 
