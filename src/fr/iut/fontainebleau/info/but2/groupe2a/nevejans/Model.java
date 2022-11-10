@@ -2,11 +2,18 @@ package src.fr.iut.fontainebleau.info.but2.groupe2a.nevejans;
 
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
+import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
+import src.fr.iut.fontainebleau.info.but2.groupe2a.fouche.*;
 
 public class Model{
     char value;
     boolean victoire = false; 
+    protected int grilleLength = 7; // rows
+    protected int grilleHeigth = 6; // collumns
 
+
+    Jeton[][] grille = new Jeton[grilleLength][grilleHeigth];
+    grille.getGrille(); 
     /**
      * Affiche la victoire du joueur
      * si c'est la victoire de la première partie lance la deuxième
@@ -17,7 +24,8 @@ public class Model{
     private void Popup(int numerojoueur){
         JOptionPane.showMessageDialog(fenetre,"Vicoire du joueur " + numerojoueur);
         if(victoire == true){
-            Partie2(numerojoueur);
+            System.out.println("lancement partie 2");
+            //Partie2(numerojoueur);
         }
     }
 
@@ -47,7 +55,7 @@ public class Model{
         //Vertical win ?
         int count = 0;
         for (int i = 0; i < 6; i++) {
-            if (Jeton[colonne][i].getValue() == value) count++; else count = 0;
+            if (grille[colonne][i].getValue() == value) count++; else count = 0;
             if (count == 3) {
                 Popup(numerojoueur);
                 return;
@@ -57,7 +65,7 @@ public class Model{
         //Horizontal win ?
         count = 0;
         for (int i = 0; i < 7; i++) {
-            if (Jeton[i][ligne] == value) count++; else count = 0;
+            if (grille[i][ligne].getValue() == value) count++; else count = 0;
             if (count == 3) {
                 Popup(numerojoueur);
                 return;
@@ -79,7 +87,7 @@ public class Model{
         while(true) {
             if (cx > 6 || cy > 5) break;
 
-            if (Jeton[cx][cy].getValue() == value) count++; else count = 0;
+            if (grille[cx][cy].getValue() == value) count++; else count = 0;
             if (count == 3) {
                 Popup(numerojoueur);
                 return;
@@ -104,7 +112,7 @@ public class Model{
 
         while(true) {
             if (cx == 6 || cy == 0) break;
-            if (Jeton[cx][cy].getValue() == value) count++; else count = 0;
+            if (grille[cx][cy].getValue() == value) count++; else count = 0;
             if (count == 3) {
                 Popup(numerojoueur);
                 return;
@@ -118,7 +126,7 @@ public class Model{
     private void CoupLegal(int colonne){
         int count = 0;
         for (int i = 0; i < 6; i++) {
-            if (Jeton[colonne][i].getValue() == value) count++; else count = 0;
+            if (grille[colonne][i].getValue() == value) count++; else count = 0;
             if (count == 6) {
 
             }
@@ -140,7 +148,7 @@ public class Model{
                 value = 'v';
                 break;
         }
-        Jeton[colonne][ligne].setValue(value);
+        grille[colonne][ligne].setValue(value);
     }
 } 
 
