@@ -1,22 +1,41 @@
-package fr.iut;
+package src.fr.iut.fontainebleau.info.but2.groupe2a.nevejans;
 
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
 
 public class Model{
-    private void Popup(){
-        JOptionPane.showMessageDialog(Vue,"Vicoire du joueur " + c);
+    char value;
+    boolean victoire = false; 
+
+    private void Popup(int numerojoueur){
+        JOptionPane.showMessageDialog(Vue,"Vicoire du joueur " + numerojoueur);
+        if(victoire == true){
+        }
     }
 
-    private void CoupVictorieux(int colonne, int ligne, boolean joueur) {
-        Color c = joueur == JOUEUR1 ? Color.RED : Color.YELLOW;
+    private void CoupVictorieux(int colonne, int ligne, int numerojoueur) {
+        switch(numerojoueur){
+
+            case 1:
+                value = 'r';
+                break;
+
+            case 2:
+                value = 'j';
+                break;
+
+            case 3:
+                value = 'v';
+                break;
+        }
+
 
         //Vertical win ?
         int count = 0;
         for (int i = 0; i < 6; i++) {
-            if (grid[colonne][i].getBackground() == c) count++; else count = 0;
+            if (grille[colonne][i] == value) count++; else count = 0;
             if (count == 4) {
-                Popup(c);
+                Popup(numerojoueur);
                 return;
             }
         }
@@ -24,74 +43,90 @@ public class Model{
         //Horizontal win ?
         count = 0;
         for (int i = 0; i < 7; i++) {
-            if (grid[i][y].getBackground() == c) count++; else count = 0;
+            if (grille[i][ligne] == value) count++; else count = 0;
             if (count == 4) {
-                Popup(c);
+                Popup(numerojoueur);
                 return;
             }
         }
 
         //Up Left --> Down Right win ?
 
-        int ox = colonne;
-        int oy = ligne;
+        int cx = colonne;
+        int cy = ligne;
 
         while (true) {
-            if (ox == 0 || oy == 0) break;
-            ox--;
-            oy--;
+            if (cx == 0 || cy == 0) break;
+            cx--;
+            cy--;
         }
 
         count = 0;
         while(true) {
-            if (ox > 6 || oy > 5) break;
+            if (cx > 6 || cy > 5) break;
 
-            if (grid[ox][oy].getBackground() == c) count++; else count = 0;
+            if (grille[cx][cy] == value) count++; else count = 0;
             if (count == 4) {
-                Popup(c);
+                Popup(numerojoueur);
                 return;
             }
 
-            ox++;
-            oy++;
+            cx++;
+            cy++;
         }
 
 
         //Down Left --> Up Right win ?
 
-        ox = colonne;
-        oy = ligne;
+        cx = colonne;
+        cy = ligne;
 
         count = 0;
         while (true) {
-            if (ox == 0 || oy == 5) break;
-            ox--;
-            oy++;
+            if (cx == 0 || cy == 5) break;
+            cx--;
+            cy++;
         }
 
         while(true) {
-            if (ox == 6 || oy == 0) break;
-            if (grid[ox][oy].getBackground() == c) count++; else count = 0;
+            if (cx == 6 || cy == 0) break;
+            if (grille[cx][cy] == value) count++; else count = 0;
             if (count == 4) {
-                Popup(c);
+                Popup(numerojoueur);
                 return;
             }
 
-            ox++;
-            oy--;
+            cx++;
+            cy--;
         }
-    } 
-
-    private void CoupLegal(int colonne)
-    {
-
-     if(){
-        
-     }   
     }
+    
+    private void CoupLegal(int colonne){
+        int count = 0;
+        for (int i = 0; i < 6; i++) {
+            if (grille[colonne][i] == value) count++; else count = 0;
+            if (count == 6) {
+                
+            }
+        }
+    }    
 
-    private void JouerCoup(int colonne,int ligne,boolean joueur){
-        Color c = player == JOUEUR1 ? Color.RED : Color.YELLOW;
+    private void JouerCoup(int colonne,int ligne,int numerojoueur){
+        switch(numerojoueur){
+
+            case 1:
+                value = 'r';
+                break;
+
+            case 2:
+                value = 'j';
+                break;
+
+            case 3:
+                value = 'v';
+                break;
+        }
+        Jeton.setValue = value;
     }
 } 
 
