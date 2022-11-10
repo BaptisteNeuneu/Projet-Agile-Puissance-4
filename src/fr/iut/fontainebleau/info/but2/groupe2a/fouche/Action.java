@@ -5,13 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Main{
-    public static void main(String[] args){
-        Vue fenetre1= new Vue(450,450,9,9,1000,800,2);
-        View vue1= new View(1000,200);
-        vue1.affichage();
-        //fenetre1.affichage();
-        //{{{{{{}}}}}};
-        //[[[[[[[]]]]]]]
+public class Action implements ActionListener{
+    public void actionPerformed(ActionEvent e){
+        System.out.println("oui");
     }
 }
