@@ -7,12 +7,26 @@ public class Model{
     char value;
     boolean victoire = false; 
 
+    /**
+     * Affiche la victoire du joueur
+     * si c'est la victoire de la première partie lance la deuxième
+     * en vérifiant si victoire est true ou false
+     * @param numerojoueur
+     */
+
     private void Popup(int numerojoueur){
-        JOptionPane.showMessageDialog(Vue,"Vicoire du joueur " + numerojoueur);
+        JOptionPane.showMessageDialog(fenetre,"Vicoire du joueur " + numerojoueur);
         if(victoire == true){
+            Partie2(numerojoueur);
         }
     }
 
+    /**
+     * Vérifie 
+     * @param colonne
+     * @param ligne
+     * @param numerojoueur
+     */
     private void CoupVictorieux(int colonne, int ligne, int numerojoueur) {
         switch(numerojoueur){
 
@@ -33,8 +47,8 @@ public class Model{
         //Vertical win ?
         int count = 0;
         for (int i = 0; i < 6; i++) {
-            if (grille[colonne][i] == value) count++; else count = 0;
-            if (count == 4) {
+            if (Jeton[colonne][i].getValue() == value) count++; else count = 0;
+            if (count == 3) {
                 Popup(numerojoueur);
                 return;
             }
@@ -43,8 +57,8 @@ public class Model{
         //Horizontal win ?
         count = 0;
         for (int i = 0; i < 7; i++) {
-            if (grille[i][ligne] == value) count++; else count = 0;
-            if (count == 4) {
+            if (Jeton[i][ligne] == value) count++; else count = 0;
+            if (count == 3) {
                 Popup(numerojoueur);
                 return;
             }
@@ -65,8 +79,8 @@ public class Model{
         while(true) {
             if (cx > 6 || cy > 5) break;
 
-            if (grille[cx][cy] == value) count++; else count = 0;
-            if (count == 4) {
+            if (Jeton[cx][cy].getValue() == value) count++; else count = 0;
+            if (count == 3) {
                 Popup(numerojoueur);
                 return;
             }
@@ -90,8 +104,8 @@ public class Model{
 
         while(true) {
             if (cx == 6 || cy == 0) break;
-            if (grille[cx][cy] == value) count++; else count = 0;
-            if (count == 4) {
+            if (Jeton[cx][cy].getValue() == value) count++; else count = 0;
+            if (count == 3) {
                 Popup(numerojoueur);
                 return;
             }
@@ -104,9 +118,9 @@ public class Model{
     private void CoupLegal(int colonne){
         int count = 0;
         for (int i = 0; i < 6; i++) {
-            if (grille[colonne][i] == value) count++; else count = 0;
+            if (Jeton[colonne][i].getValue() == value) count++; else count = 0;
             if (count == 6) {
-                
+
             }
         }
     }    
@@ -126,7 +140,7 @@ public class Model{
                 value = 'v';
                 break;
         }
-        Jeton.setValue = value;
+        Jeton[colonne][ligne].setValue(value);
     }
 } 
 
