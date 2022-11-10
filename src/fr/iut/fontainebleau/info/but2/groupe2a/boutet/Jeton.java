@@ -6,21 +6,31 @@ import java.awt.Color;
 
 public class Jeton extends JPanel {
     private char value;
-    private int x, y;
+    private int colonne, ligne;
 
-    public Jeton(int x, int y, char value) {
-        this.x = x;
-        this.y = y;
+    public Jeton(int colonne, int ligne, char value) {
+        this.colonne = colonne;
+        this.ligne = ligne;
         this.value = value;
 
         setOpaque(false);
-        setForeground(Color.BLACK);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // System.out.println("Jeton ajouté !");
-        g.setColor(getForeground());
+        switch(this.value){
+            case '-':
+                g.setColor(Color.BLACK);
+                break;
+            case 'j':
+                g.setColor(Color.YELLOW);
+                break;
+            case 'r':
+                g.setColor(Color.RED);
+                break;
+            
+        }
         g.fillOval(0, 0, getWidth() - 4, getHeight() - 4);
     }
 
@@ -28,15 +38,23 @@ public class Jeton extends JPanel {
         this.value = c;
     }
 
+    public void setColonne(int a){
+        this.colonne = a;
+    }
+    
+    public void setLigne(int a){
+        this.ligne = a;
+    }
+
     public char getValue() {
         return this.value;
     }
 
-    public int getPosX() {
-        return this.x;
+    public int getColonne() {
+        return this.colonne;
     }
 
-    public int getPosY() {
-        return this.y;
+    public int getLigne() {
+        return this.ligne;
     }
 }

@@ -9,13 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
-public class View extends Controller implements MouseListener {
-    protected JFrame fenetre = new JFrame("Puissance 4");
-    protected JPanel p = new JPanel();
-    private char g[][] = new char[6][7];
+public class View implements MouseListener {
+    protected JFrame fenetre;
+    protected JPanel p;
+    private Grille grille;
     private boolean turn = false; // tour du joueur jaune turn=false | tour du joueur rouge turn=true
 
     public View(int x, int y) {
+        
+    
         /* la fenetre */
         this.fenetre = new JFrame("Puissance 4");
         this.fenetre.setSize(x, y);
@@ -23,26 +25,28 @@ public class View extends Controller implements MouseListener {
         this.fenetre.setDefaultCloseOperation(3);
 
         /* la grille */
-        GridSetUp();
-        PrintGrille();
+        this.grille = new Grille();
+        grille.PrintGrille();
 
         /* Faire en sorte que le plateau reste toujours au centre de la fenetre */
-        Box box = new Box(BoxLayout.Y_AXIS);
+        // Box box = new Box(BoxLayout.Y_AXIS);
 
-        box.add(Box.createVerticalGlue());
-        box.add(p);
-        box.add(Box.createVerticalGlue()); // causes a deformation
+        // box.add(Box.createVerticalGlue());
+        // box.add(p);
+        // box.add(Box.createVerticalGlue()); // causes a deformation
 
+        this.p = new JPanel();
         p.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        for (int i = 0; i < getGrilleLength(); i++) {
-            for (int j = 0; j < getGrilleHeigth(); j++) {
-                Jeton jeton = new Jeton(i, j, g[i][j]);
-                System.out.println("x = " + jeton.getPosX() + " y = " + jeton.getPosY() + " Value = " + jeton.getValue());
+        
+        for (int i = 0; i < grille.getNombreColonne(); i++) {
+            for (int j = 0; j < grille.getNombreLigne(); j++) {
+                Jeton jeton = this.grille.getJeton(i,j);
+                //System.out.println("x = " + jeton.getLigne() + " y = " + jeton.getColonne() + " Value = " + jeton.getValue());
                 jeton.addMouseListener(this);
-                gbc.gridx = i;
-                gbc.gridy = j;
+                gbc.gridx = this.grille.getNombreLigne() -  i;
+                gbc.gridy = this.grille.getNombreColonne() - j;
                 gbc.ipadx = 50;
                 gbc.ipady = 50;
                 gbc.gridwidth = 1;
@@ -57,7 +61,8 @@ public class View extends Controller implements MouseListener {
         this.p.setMinimumSize(new Dimension(485, 400));
         this.p.setMaximumSize(new Dimension(485, 400));
         this.p.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        this.fenetre.add(box);
+        this.fenetre.add(p);
+        // this.fenetre.add(box);
         /* le texte */
 
         /* le bouton */
@@ -67,21 +72,26 @@ public class View extends Controller implements MouseListener {
         this.fenetre.setVisible(true);
     }
 
-    public void GridSetUp() {
-        this.g = RecupGrille();
-    }
 
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getComponent());
         if (turn == false) {// Tour du joueur Jaune
-            e.getComponent().setForeground(Color.YELLOW);
-            this.fenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+            Component j =  e.getComponent();//Récupere le jeton ayant recu le clique
+            Jeton jeton = (Jeton) j;
+            int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+            this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
+            this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
             this.turn = true;
+            this.fenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+            
         } else {// tour du joueur Rouge
-            this.fenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
-            e.getComponent().setForeground(Color.RED);
-            // System.out.println(e.getComponent());
+            Component j =  e.getComponent();//Récupere le jeton ayant recu le clique
+            Jeton jeton = (Jeton) j;
+            int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+            this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
+            this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
             this.turn = false;
+            this.fenetre.setTitle("Puissance 4 : Tour du joueur Jaune"); 
         }
     }
 
@@ -89,25 +99,26 @@ public class View extends Controller implements MouseListener {
     }
 
     public void mouseEntered(MouseEvent e) {
-        System.out.print("En entrée : " + e.getComponent().getForeground());
-        /* Si la case est "vide" donc noire, alors je la peints en gris */
-        if (e.getComponent().getForeground() == Color.BLACK) {
-            e.getComponent().setForeground(Color.gray);
-            System.out.print(" -> Couleur changée ");
+        if(e.getComponent().getForeground() == Color.BLACK){
+            if (turn == false) {// Tour du joueur Jaune
+                Component j =  e.getComponent();//Récupere le jeton ayant recu le clique
+                Jeton jeton = (Jeton) j;
+                int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setForeground(Color.GRAY);            
+            } else {// tour du joueur Rouge
+                Component j =  e.getComponent();//Récupere le jeton ayant recu le clique
+                Jeton jeton = (Jeton) j;
+                int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setForeground(Color.GRAY);
+            }
         }
     }
 
     public void mouseExited(MouseEvent e) {
-        System.out.print(" ---- En sortie : " + e.getComponent().getForeground());
-        /*
-         * Si la case est grise, donc survolée et que je quitte la case, alors je remets
-         * ma case en noire
-         */
         if (e.getComponent().getForeground() == Color.gray) {
             e.getComponent().setForeground(Color.BLACK);
             System.out.print(" -> Couleur changée \n");
         }
-
     }
 
     public void mouseReleased(MouseEvent e) {
