@@ -1,22 +1,63 @@
-package fr.iut;
+package src.fr.iut.fontainebleau.info.but2.groupe2a.nevejans;
 
-import javax.swing.JOptionPane;
-import javax.swing.Popup;
+//import javax.swing.JOptionPane;
+//import javax.swing.Popup;
+import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
+//import src.fr.iut.fontainebleau.info.but2.groupe2a.fouche.*;
 
 public class Model{
-    private void Popup(){
-        JOptionPane.showMessageDialog(Vue,"Vicoire du joueur " + c);
+    char value;
+    boolean victoire = false; 
+    protected int grilleLength = 7; // rows
+    protected int grilleHeigth = 6; // collumns
+
+
+    Jeton[][] grille = new Jeton[grilleLength][grilleHeigth];
+    //grille.getGrille(); 
+    /**
+     * Affiche la victoire du joueur
+     * si c'est la victoire de la première partie lance la deuxième
+     * en vérifiant si victoire est true ou false
+     * @param numerojoueur
+     */
+
+    private void Popup(int numerojoueur){
+        //JOptionPane.showMessageDialog(fenetre,"Vicoire du joueur " + numerojoueur);
+        if(victoire == true){
+            System.out.println("lancement partie 2");
+            //Partie2(numerojoueur);
+        }
     }
 
-    private void CoupVictorieux(int colonne, int ligne, boolean joueur) {
-        Color c = joueur == JOUEUR1 ? Color.RED : Color.YELLOW;
+    /**
+     * Vérifie 
+     * @param colonne
+     * @param ligne
+     * @param numerojoueur
+     */
+    private void CoupVictorieux(int colonne, int ligne, int numerojoueur) {
+        switch(numerojoueur){
+
+            case 1:
+                value = 'r';
+                break;
+
+            case 2:
+                value = 'j';
+                break;
+
+            case 3:
+                value = 'v';
+                break;
+        }
+
 
         //Vertical win ?
         int count = 0;
         for (int i = 0; i < 6; i++) {
-            if (grid[colonne][i].getBackground() == c) count++; else count = 0;
-            if (count == 4) {
-                Popup(c);
+            if (grille[colonne][i].getValue() == value) count++; else count = 0;
+            if (count == 3) {
+                Popup(numerojoueur);
                 return;
             }
         }
@@ -24,74 +65,63 @@ public class Model{
         //Horizontal win ?
         count = 0;
         for (int i = 0; i < 7; i++) {
-            if (grid[i][y].getBackground() == c) count++; else count = 0;
-            if (count == 4) {
-                Popup(c);
+            if (grille[i][ligne].getValue() == value) count++; else count = 0;
+            if (count == 3) {
+                Popup(numerojoueur);
                 return;
             }
         }
 
         //Up Left --> Down Right win ?
 
-        int ox = colonne;
-        int oy = ligne;
+        int cx = colonne;
+        int cy = ligne;
 
         while (true) {
-            if (ox == 0 || oy == 0) break;
-            ox--;
-            oy--;
+            if (cx == 0 || cy == 0) break;
+            cx--;
+            cy--;
         }
 
         count = 0;
         while(true) {
-            if (ox > 6 || oy > 5) break;
+            if (cx > 6 || cy > 5) break;
 
-            if (grid[ox][oy].getBackground() == c) count++; else count = 0;
-            if (count == 4) {
-                Popup(c);
+            if (grille[cx][cy].getValue() == value) count++; else count = 0;
+            if (count == 3) {
+                Popup(numerojoueur);
                 return;
             }
 
-            ox++;
-            oy++;
+            cx++;
+            cy++;
         }
 
 
         //Down Left --> Up Right win ?
 
-        ox = colonne;
-        oy = ligne;
+        cx = colonne;
+        cy = ligne;
 
         count = 0;
         while (true) {
-            if (ox == 0 || oy == 5) break;
-            ox--;
-            oy++;
+            if (cx == 0 || cy == 5) break;
+            cx--;
+            cy++;
         }
 
         while(true) {
-            if (ox == 6 || oy == 0) break;
-            if (grid[ox][oy].getBackground() == c) count++; else count = 0;
-            if (count == 4) {
-                Popup(c);
+            if (cx == 6 || cy == 0) break;
+            if (grille[cx][cy].getValue() == value) count++; else count = 0;
+            if (count == 3) {
+                Popup(numerojoueur);
                 return;
             }
 
-            ox++;
-            oy--;
+            cx++;
+            cy--;
         }
-    } 
-
-    private void CoupLegal(int colonne)
-    {
-
-     if(){
-        
-     }   
     }
-
-    private void JouerCoup(int colonne,int ligne,boolean joueur){
-        Color c = player == JOUEUR1 ? Color.RED : Color.YELLOW;
-    }
+       
 } 
 
