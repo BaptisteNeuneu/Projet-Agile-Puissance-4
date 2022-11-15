@@ -29,6 +29,8 @@ public class Jeton extends JPanel {
             case 'r':
                 g.setColor(Color.RED);
                 break;
+            case 'v':
+                g.setColor(Color.GREEN);
             
         }
         g.fillOval(0, 0, getWidth() - 4, getHeight() - 4);

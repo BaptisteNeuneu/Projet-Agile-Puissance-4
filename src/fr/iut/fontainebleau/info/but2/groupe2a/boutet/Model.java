@@ -1,6 +1,6 @@
-package src.fr.iut.fontainebleau.info.but2.groupe2a.nevejans;
+package src.fr.iut.fontainebleau.info.but2.groupe2a.boutet;
 
-import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
+
 
 import javax.swing.*;
 //import src.fr.iut.fontainebleau.info.but2.groupe2a.fouche.*;
