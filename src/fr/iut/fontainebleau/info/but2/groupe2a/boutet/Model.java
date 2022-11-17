@@ -28,19 +28,21 @@ public class Model {
      */
 
     private void Popup(int numerojoueur) {
-        JOptionPane.showMessageDialog(fenetre, "Vicoire du joueur " + numerojoueur);
-        System.out.println("Le joueur " + numerojoueur + " a gagné");
         if (victoire == true) {
+            JOptionPane.showMessageDialog(fenetre, "Le joueur" + numerojoueur + "a gagné le 1 vc 1");
+            System.out.println("Le joueur" + numerojoueur + "a gagné le 1 vc 1");
+            return;   
+        } else {
+            JOptionPane.showMessageDialog(fenetre, "Vicoire du joueur " + numerojoueur);
+            System.out.println("Le joueur " + numerojoueur + " a gagné");
             System.out.println("lancement partie 2");
+            victoire = true;
             // Partie2(numerojoueur);
         }
     }
 
     private void Popup2() {
          JOptionPane.showMessageDialog(fenetre,"Personne ne gagne");
-        if (victoire == true) {
-            System.out.println("Personne ne gagne");
-        }
     }
 
     /**
