@@ -14,6 +14,6 @@ public class DessinJeton extends JComponent{
     secondPinceau.setColor(this.couleur);
     secondPinceau.fillOval(5,5,100,100);
     secondPinceau.setColor(Color.BLACK);
-    secondPinceau.drawRect(0,0,109,109);
+    secondPinceau.drawOval(5,5,100,100);
   }
 }
