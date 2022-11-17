@@ -30,7 +30,7 @@ public class Model {
     private void Popup(int numerojoueur) {
         if (victoire == true) {
             JOptionPane.showMessageDialog(fenetre, "Le joueur" + numerojoueur + "a gagné le 1 vc 1");
-            System.out.println("Le joueur" + numerojoueur + "a gagné le 1 vc 1");
+            System.out.println("Le joueur" + numerojoueur + " a gagné le 1 vc 1");
             return;   
         } else {
             JOptionPane.showMessageDialog(fenetre, "Vicoire du joueur " + numerojoueur);
