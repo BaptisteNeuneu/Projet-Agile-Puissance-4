@@ -188,20 +188,20 @@ public class Vue {
 
 
     public void ajouterGrille() {
-                /* la grille */
-        //Controlleur liaison= new Controlleur();
-        //Controlleur.getGrille();
-        this.Grille=new JPanel();
-        this.Grille.setPreferredSize(new Dimension(this.horizontal,this.vertical));
-        GridLayout gestionnaire = new GridLayout(this.ligne,this.colonne);
+        Extension ext= new Extension(800,600);
+        this.Grille=ext.getPanel();
+        this.Grille.setPreferredSize(new Dimension(485, 400));
+        this.Grille.setMinimumSize(new Dimension(485, 400));
+        this.Grille.setMaximumSize(new Dimension(485, 400));
+        //this.Grille.setPreferredSize(new Dimension(this.horizontal,this.vertical));
+        /*GridLayout gestionnaire = new GridLayout(this.ligne,this.colonne);
         this.Grille.setLayout(gestionnaire);
         for(int i=0;i<this.colonne*this.ligne;i++){
             DessinGrille test=new DessinGrille(this.horizontal/this.colonne,this.vertical/this.ligne);
             test.setPreferredSize(new Dimension(this.horizontal/this.colonne,this.vertical/this.ligne));
-            //System.out.println(test.getPreferredSize());
             this.Grille.add(test);
-        }
-        this.layoutOptions(1,2,this.colonne,this.ligne,GridBagConstraints.BOTH,GridBagConstraints.CENTER,0.0,0.0,new Insets(0, 0, 0, 0));
+        }*/
+        this.layoutOptions(1,2,this.colonne,this.ligne,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(0, 0, 0, 0));
         this.VueFenetre.add(this.Grille,this.gbc);
 
         DessinTotal d=new DessinTotal(this.colonne);
