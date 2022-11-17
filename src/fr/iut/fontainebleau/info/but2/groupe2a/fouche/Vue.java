@@ -46,7 +46,7 @@ public class Vue {
         
         
         /*le Vide */
-        int nb=0,parite=-1,decalage;
+        /*int nb=0,parite=-1,decalage;
         if(this.colonne%2==0){
             parite=0;
         }else if(this.colonne%2==1){
@@ -70,10 +70,10 @@ public class Vue {
         }
         for (int i=0;i<nb;i++){
             this.creerVide(i+decalage,this.ligne+1);
-        }
-        this.ajouterTexte(numeroJoueur,decalage,nb);
-        this.ajouterJeton(decalage,nb);
-        this.ajouterAide();
+        }*/
+        //this.ajouterTexte(numeroJoueur,decalage,nb);
+        //this.ajouterJeton(3);
+        //this.ajouterAide();
 
         this.VueFenetre.setVisible(true);
         this.VueFenetre.addMouseListener(new Action(this));
@@ -113,9 +113,14 @@ public class Vue {
     }
 
 
-    public void ajouterJeton(int decalage,int nb) {
-
-        String texte = "21";
+    public void ajouterJeton(int nbJoueur) {
+        String texte="";
+        if(nbJoueur==2){
+            texte = "21";
+        }
+        if(nbJoueur==3){
+            texte = "14";
+        }
         this.zoneJaune  = new JLabel(texte);
         this.zoneRouge  = new JLabel(texte);
         this.zoneVert  = new JLabel(texte);
@@ -126,17 +131,17 @@ public class Vue {
         DessinJeton dessinVert = new DessinJeton(Color.GREEN);
         dessinVert.setPreferredSize(new Dimension(110,110));
 
-        this.layoutOptions(this.colonne+2,3,2,1,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
+        this.layoutOptions(this.colonne+2,2,2,2,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
         this.VueFenetre.add(zoneJaune,this.gbc);
         this.layoutOptions(this.colonne+2,2,2,2,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
         this.VueFenetre.add(dessinJaune,this.gbc);
 
-        this.layoutOptions(this.colonne+2,5,2,1,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
+        this.layoutOptions(this.colonne+2,4,2,2,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
         this.VueFenetre.add(zoneRouge,this.gbc);
         this.layoutOptions(this.colonne+2,4,2,2,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
         this.VueFenetre.add(dessinRouge,this.gbc);
 
-        this.layoutOptions(this.colonne+2,7,2,1,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
+        this.layoutOptions(this.colonne+2,6,2,2,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
         this.VueFenetre.add(zoneVert,this.gbc);
         this.layoutOptions(this.colonne+2,6,2,2,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(5, 5, 5, 5));
         this.VueFenetre.add(dessinVert,this.gbc);
@@ -183,14 +188,12 @@ public class Vue {
 
 
     public void ajouterGrille() {
-        Extension ext= new Extension(800,600);
-        /*this.Grille=ext.getPanel();
-        this.Grille.setPreferredSize(new Dimension(485, 400)); for (int i=0;i<this.ligne;i++){
-            this.creerVide(this.colonne+1,i+2);
-        }
-        this.Grille.setMinimumSize(new Dimension(485, 400));
-        this.Grille.setMaximumSize(new Dimension(485, 400));*/
-        this.Grille=new JPanel();
+        Extension ext= new Extension(1920,1080);
+        this.Grille=ext.getPanel();
+        this.Grille.setPreferredSize(new Dimension(this.horizontal,this.vertical));
+        this.Grille.setMinimumSize(new Dimension(this.horizontal,this.vertical));
+        this.Grille.setMaximumSize(new Dimension(this.horizontal,this.vertical));
+        /*this.Grille=new JPanel();
         this.Grille.setPreferredSize(new Dimension(this.horizontal,this.vertical));
         GridLayout gestionnaire = new GridLayout(this.ligne,this.colonne);
         this.Grille.setLayout(gestionnaire);
@@ -198,14 +201,14 @@ public class Vue {
             DessinGrille test=new DessinGrille(this.horizontal/this.colonne,this.vertical/this.ligne);
             test.setPreferredSize(new Dimension(this.horizontal/this.colonne,this.vertical/this.ligne));
             this.Grille.add(test);
-        }
+        }*/
         this.layoutOptions(2,2,this.colonne,this.ligne,GridBagConstraints.NONE,GridBagConstraints.CENTER,0.0,0.0,new Insets(0, 0, 0, 0));
         this.VueFenetre.add(this.Grille,this.gbc);
 
-        DessinTotal d=new DessinTotal(this.colonne);
+        /*DessinTotal d=new DessinTotal(this.colonne);
         d.setPreferredSize(new Dimension(this.horizontal/this.colonne,this.vertical/this.ligne));
         this.layoutOptions(2,1,this.colonne,1,GridBagConstraints.BOTH,GridBagConstraints.CENTER,0.0,0.0,new Insets(0, 0, 0, 0));
-        this.VueFenetre.add(d,this.gbc);
+        this.VueFenetre.add(d,this.gbc);*/
     }
 
 

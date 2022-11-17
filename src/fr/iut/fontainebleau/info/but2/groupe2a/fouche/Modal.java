@@ -13,6 +13,7 @@ public class Modal extends JComponent{
         bubulle.setSize(300,300);
         bubulle.setLocation(0,0);
         popup.add(bubulle);
+        
         popup.setVisible(true);
     }
 }
