@@ -9,8 +9,7 @@ public class Model {
     char value;
     boolean victoire = false;
 
-    protected int grilleLength = 7; // rows
-    protected int grilleHeigth = 6; // collumns
+
 
     private Grille grille = new Grille();
     private JFrame fenetre = new JFrame();
@@ -38,10 +37,9 @@ public class Model {
     }
 
     private void Popup2() {
-        // JOptionPane.showMessageDialog(fenetre,"Personne ne gagne");
+         JOptionPane.showMessageDialog(fenetre,"Personne ne gagne");
         if (victoire == true) {
             System.out.println("Personne ne gagne");
-            // Partie2(numerojoueur);
         }
     }
 
@@ -53,12 +51,12 @@ public class Model {
      * @param numerojoueur
      */
     public void CoupVictorieux(int colonne, int ligne, int numerojoueur) {
-        /*
-         * int jetonvictorieu = 3;
-         * if(victoire == true){
-         * jetonvictorieu = 4;
-         * }
-         */
+        
+         int jetonvictorieu = 3;
+          if(victoire == true){
+          jetonvictorieu = 4;
+          }
+         
         switch (numerojoueur) {
 
             case 1:
@@ -81,7 +79,7 @@ public class Model {
                 count++;
             else
                 count = 0;
-            if (count == 4) {
+            if (count == jetonvictorieu) {
                 Popup(numerojoueur);
                 return;
             }
@@ -94,7 +92,7 @@ public class Model {
                 count++;
             else
                 count = 0;
-            if (count == 4) {
+            if (count == jetonvictorieu) {
                 Popup(numerojoueur);
                 return;
             }
@@ -121,7 +119,7 @@ public class Model {
                 count++;
             else
                 count = 0;
-            if (count == 4) {
+            if (count == jetonvictorieu) {
                 Popup(numerojoueur);
                 return;
             }
@@ -150,7 +148,7 @@ public class Model {
                 count++;
             else
                 count = 0;
-            if (count == 4) {
+            if (count == jetonvictorieu) {
                 Popup(numerojoueur);
                 return;
             }
