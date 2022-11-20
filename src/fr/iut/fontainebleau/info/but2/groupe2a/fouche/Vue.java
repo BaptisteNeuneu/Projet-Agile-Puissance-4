@@ -308,6 +308,12 @@ public class Vue implements MouseListener {
             this.premier=(this.numerojoueur%3+1)%3+1;
             this.changement();
             this.a.setPassage(false);
+            /*Jeton[][] jetons =this.grille.getGrille();
+            for(int i=0;i<this.horizontal;i++){
+                for(int k=0;k<this.vertical;k++){
+                    this.a.CoupVictorieux(jetons[i][k].getColonne(), ligneNouveauJeton, numerojoueur);
+                }
+            }*/
         }
     }
 

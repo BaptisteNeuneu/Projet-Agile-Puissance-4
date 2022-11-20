@@ -148,7 +148,7 @@ public class Model {
         }
 
         while (true) {
-            if (cx == 6 || cy == 0)
+            if (cx > 6 || cy < 0)
                 break;
             if (this.grille.getGrille()[cx][cy].getValue() == value)
                 count++;
