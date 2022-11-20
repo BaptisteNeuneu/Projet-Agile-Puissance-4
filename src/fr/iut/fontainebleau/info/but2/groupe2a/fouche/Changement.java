@@ -1,5 +1,5 @@
 package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
-
+import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
 /*Voici la fonction Vue elle ouvre une fenètre avec une fausse grille dedans*/
 import java.awt.*;
 import javax.swing.*;
@@ -10,40 +10,59 @@ public class Changement{
         if(n==1){
             f.remove(r);
             f.revalidate();
-            f.setVisible(false);
-            f.setVisible(true);
+            Changement.augmenter(j);
+            Changement.augmenter(v);
         }
         if(n==2){
             f.remove(j);
             f.revalidate();
-            f.setVisible(false);
-            f.setVisible(true);
+            Changement.augmenter(r);
+            Changement.augmenter(v);
         }
         if(n==3){
             f.remove(v);
             f.revalidate();
-            f.setVisible(false);
-            f.setVisible(true);
+            Changement.augmenter(r);
+            Changement.augmenter(j);
         }
     }
     public static void retirer(JFrame f,DessinJeton r,DessinJeton j,DessinJeton v,int n){
         if(n==1){
             f.remove(r);
             f.revalidate();
-            f.setVisible(false);
-            f.setVisible(true);
         }
         if(n==2){
             f.remove(j);
             f.revalidate();
-            f.setVisible(false);
-            f.setVisible(true);
         }
         if(n==3){
             f.remove(v);
             f.revalidate();
-            f.setVisible(false);
-            f.setVisible(true);
         }
+    }
+    public static void augmenter(JLabel t){
+            String texte = t.getText();
+            int n = Integer.parseInt(texte);
+            n = n + 7;
+            texte = Integer.toString(n);
+            t.setText(texte);
+    }
+
+    public static void decoloriser(Grille g,int n)
+    {
+        if(n==2){
+            g.removeColor('r');
+        }
+        if(n==3){
+            g.removeColor('j');
+        }
+        if(n==1){
+            g.removeColor('v');
+        }
+    }
+
+    public static void afficher(JFrame f){
+        f.setVisible(false);
+        f.setVisible(true);
     }
 }

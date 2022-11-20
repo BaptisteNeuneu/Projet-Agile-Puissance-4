@@ -25,6 +25,7 @@ public class Vue implements MouseListener {
     private DessinJeton dessinRouge;
     private DessinJeton dessinJaune;
     private DessinJeton dessinVert;
+    private int premier;
 
     /*
      * Le constructeur Vue prend comme paramètre dans l'ordre la longueur des cases,
@@ -32,6 +33,7 @@ public class Vue implements MouseListener {
      * de la fenetre, la hauteur de la fenetre,
      */
     public Vue() {
+        this.premier=0;
         this.horizontal = 1050;
         this.vertical = 660;
         this.colonne = 7;
@@ -294,38 +296,15 @@ public class Vue implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
         this.reduireJeton(this.numerojoueur);
-        System.out.println(e.getComponent());
+        //System.out.println(e.getComponent());
+        //System.out.println(this.premier);
         Component j = e.getComponent();// Récupere le jeton ayant recu le clique
         Jeton jeton = (Jeton) j;
         int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
         //this.grille.PrintGrille();
-        switch (this.numerojoueur) {
-
-            case 1:
-                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
-                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
-                a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
-                this.numerojoueur = 2;
-                this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
-                break;
-
-            case 2:
-                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
-                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
-                a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
-                this.numerojoueur = 3;
-                this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
-                break;
-
-            case 3:
-                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
-                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
-                a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
-                this.numerojoueur = 1;
-                this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
-                break;
-        }
+        this.colorier(jeton,ligneNouveauJeton,this.premier);
         if(this.a.getPassage()){
+            this.premier=(this.numerojoueur%3+1)%3+1;
             this.changement();
             this.a.setPassage(false);
         }
@@ -367,5 +346,89 @@ public class Vue implements MouseListener {
     public void changement(){
         Changement.retirer(this.VueFenetre,this.zoneJaune,this.zoneRouge,this.zoneVert,this.numerojoueur);
         Changement.retirer(this.VueFenetre,this.dessinJaune,this.dessinRouge,this.dessinVert,this.numerojoueur);
+        Changement.decoloriser(this.grille,this.numerojoueur);
+        Changement.afficher(this.VueFenetre);
+    }
+
+    public void colorier(Jeton jeton,int ligneNouveauJeton,int n){
+        if(n==0){
+            switch (this.numerojoueur) {
+                case 1:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 2;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                    break;
+                case 2:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 3;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                    break;
+                case 3:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 1;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                    break;
+            }
+        }
+        if(n==1){
+            switch (this.numerojoueur) {
+                case 2:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 3;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                    break;
+                case 3:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 2;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                    break;
+            }
+        }
+        if(n==2){
+            switch (this.numerojoueur) {
+                case 1:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 3;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                    break;
+                case 3:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 1;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                    break;
+            }
+        }
+        if(n==3){
+            switch (this.numerojoueur) {
+                case 1:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 2;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                    break;
+                case 2:
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
+                    this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                    a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                    this.numerojoueur = 1;
+                    this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                    break;
+            }
+        }
     }
 }

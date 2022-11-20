@@ -9,6 +9,7 @@ public class Model {
     char value;
     boolean victoire = false;
     boolean passage=false;
+    int nbJoueur=3;
 
 
 
@@ -35,6 +36,7 @@ public class Model {
             return;   
         } else {
             this.passage=true;
+            this.nbJoueur=2;
             JOptionPane.showMessageDialog(fenetre, "Vicoire du joueur " + numerojoueur);
             System.out.println("Le joueur " + numerojoueur + " a gagné");
             System.out.println("lancement partie 2");
@@ -185,5 +187,11 @@ public class Model {
     public boolean getPassage(){
         return this.passage;
     }
+    public void setNbJoueur(int n){
+        this.nbJoueur=n;
+    }
 
+    public int getNbJoueur(){
+        return this.nbJoueur;
+    }
 }

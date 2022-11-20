@@ -75,6 +75,30 @@ public class Grille {
         }
         return i;
     }
+    public void removeColor(char c){
+        for (int i = 0; i < nombreColonne; i++) {
+            for (int j = 0; j < nombreLigne; j++) {
+                if(c == 'r'){
+                    if(this.grille[i][j].getValue()=='r'){
+                        this.grille[i][j].setValue('-');
+                        this.grille[i][j].repaint();
+                    }
+                }
+                if(c == 'j'){
+                    if(this.grille[i][j].getValue()=='j'){
+                        this.grille[i][j].setValue('-');
+                        this.grille[i][j].repaint();
+                    }
+                }
+                if(c == 'v'){
+                    if(this.grille[i][j].getValue()=='v'){
+                        this.grille[i][j].setValue('-');
+                        this.grille[i][j].repaint();
+                    }
+                }
+            }
+        }
+    }
     public int getWidth() {
         return this.width;
     }
