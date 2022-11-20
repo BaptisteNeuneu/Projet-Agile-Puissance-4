@@ -26,7 +26,7 @@ public class View implements MouseListener {
         this.fenetre.setDefaultCloseOperation(3);
 
         /* la grille */
-        this.grille = new Grille();
+        this.grille = new Grille(485,400);
         grille.PrintGrille();
         this.a = new Model(grille, fenetre);
 

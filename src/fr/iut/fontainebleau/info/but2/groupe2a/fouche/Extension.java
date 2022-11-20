@@ -11,8 +11,8 @@ public class Extension extends View{
         this.p=super.p;
     }
 
-    public JPanel getPanel(){
-        Grille grille=new Grille();
+    /*public JPanel getPanel(){
+        Grille grille=new Grille(0,0);
         this.p.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -39,5 +39,5 @@ public class Extension extends View{
         this.p.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         //this.fenetre.add(p);
         return this.p;
-    }
+    }*/
 }

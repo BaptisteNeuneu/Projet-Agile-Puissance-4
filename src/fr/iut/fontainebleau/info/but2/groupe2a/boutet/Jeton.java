@@ -6,12 +6,14 @@ import java.awt.Color;
 
 public class Jeton extends JPanel {
     private char value;
-    private int colonne, ligne;
+    private int colonne, ligne,width,height;
 
-    public Jeton(int colonne, int ligne, char value) {
+    public Jeton(int colonne, int ligne, char value, int width, int height) {
         this.colonne = colonne;
         this.ligne = ligne;
         this.value = value;
+        this.width = width;
+        this.height = height;
 
         setOpaque(false);
     }
@@ -33,7 +35,13 @@ public class Jeton extends JPanel {
                 g.setColor(Color.GREEN);
             
         }
-        g.fillOval(0, 0, getWidth() - 4, getHeight() - 4);
+        //System.out.println(this.getWidth()*this.getColonne());
+        if(this.getWidth()<this.getHeight()){
+            g.fillOval(0,0,this.getWidth()-4,this.getWidth()-4);
+        }else{
+            g.fillOval(0,0,this.getHeight()-4,this.getHeight()-4);
+        }
+        //g.fillOval(0, 0, this.getWidth() - 4, this.getHeight() - 4);
     }
 
     public void setValue(char c) {
@@ -48,6 +56,14 @@ public class Jeton extends JPanel {
         this.ligne = a;
     }
 
+    public void setWidth(int a){
+        this.width = a;
+    }
+    
+    public void setHeight(int a){
+        this.height = a;
+    }
+
     public char getValue() {
         return this.value;
     }
@@ -58,5 +74,13 @@ public class Jeton extends JPanel {
 
     public int getLigne() {
         return this.ligne;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 }

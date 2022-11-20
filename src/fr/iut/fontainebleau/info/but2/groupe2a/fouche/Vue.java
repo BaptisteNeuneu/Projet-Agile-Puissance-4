@@ -1,12 +1,9 @@
-
+package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 
 /*Voici la fonction Vue elle ouvre une fenètre avec une fausse grille dedans*/
 import java.awt.*;
 import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
 import javax.swing.*;
-
-import fr.iut.fontainebleau.info.but2.groupe2a.fouche.ActionGrille;
-
 import java.awt.event.*;
 
 public class Vue implements MouseListener {
@@ -25,7 +22,6 @@ public class Vue implements MouseListener {
     private JLabel zoneRouge;
     private JLabel zoneVert;
     private short numerojoueur = 1;
-    private ActionGrille actiongrille;
 
     /*
      * Le constructeur Vue prend comme paramètre dans l'ordre la longueur des cases,
@@ -71,7 +67,7 @@ public class Vue implements MouseListener {
         this.ajouterJeton(3);
         this.ajouterAide();
 
-        this.VueFenetre.addMouseListener(new ActionFenetre(this));
+        this.VueFenetre.addMouseListener(new Action(this));
     }
 
     public void affichage() {
@@ -197,36 +193,41 @@ public class Vue implements MouseListener {
     }
 
     public void ajouterGrille() {
-        this.grille = new Grille();
-        grille.PrintGrille();
-        this.a = new Model(grille, VueFenetre);
-        actiongrille = new ActionGrille();
-        Grille = new JPanel();
+        this.grille = new Grille(this.horizontal,this.vertical);
+        //grille.PrintGrille();
+        this.a = new Model(this.grille, this.VueFenetre);
+        JPanel Grille = new JPanel();
         Grille.setLayout(new GridBagLayout());
-        actiongrille = new ActionGrille(grille, VueFenetre, a, numerojoueur);
         GridBagConstraints gbc = new GridBagConstraints();
-
-        for (int i = 0; i < grille.getNombreColonne(); i++) {
-            for (int j = 0; j < grille.getNombreLigne(); j++) {
-                Jeton jeton = this.grille.getJeton(i, j);
+        JPanel pan = new JPanel();
+        GridLayout layout = new GridLayout(this.ligne,this.colonne);
+        pan.setPreferredSize(new Dimension(this.horizontal,this.vertical));
+        pan.setMinimumSize(new Dimension(this.horizontal,this.vertical));
+        pan.setMaximumSize(new Dimension(this.horizontal,this.vertical));
+        pan.setLayout(layout);
+        for (int i = grille.getNombreLigne()-1; i >= 0; i--) {
+            for (int j =  grille.getNombreColonne()-1; j >=0; j--) {
+                Jeton jeton = this.grille.getJeton(j, i);
                 // System.out.println("x = " + jeton.getLigne() + " y = " + jeton.getColonne() +
                 // " Value = " + jeton.getValue());
-                jeton.addMouseListener(actiongrille);
-                gbc.gridx = this.grille.getNombreLigne() - i;
-                gbc.gridy = this.grille.getNombreColonne() - j;
-                gbc.ipadx = 50;
-                gbc.ipady = 50;
-                gbc.gridwidth = 1;
-                gbc.gridheight = 1;
+                jeton.addMouseListener(this);
+                //System.out.println(this.horizontal/this.colonne*i);
+                //System.out.println(this.vertical/this.ligne*j);
+                gbc.gridx = this.horizontal/this.colonne*i;
+                gbc.gridy = this.vertical/this.ligne*j;
+                gbc.ipadx = 0;
+                gbc.ipady = 0;
+                gbc.gridwidth = this.horizontal/this.colonne;
+                gbc.gridheight = this.vertical/this.ligne;
                 gbc.fill = GridBagConstraints.BOTH;
-                Grille.add(jeton, gbc);
+                pan.add(jeton);
             }
         }
-
-        Grille.setBackground(Color.BLUE);
-        Grille.setPreferredSize(new Dimension(485, 400));
-        Grille.setMinimumSize(new Dimension(485, 400));
-        Grille.setMaximumSize(new Dimension(485, 400));
+        pan.setBackground(Color.BLUE);
+        Grille.add(pan, gbc);
+        Grille.setPreferredSize(new Dimension(this.horizontal,this.vertical));
+        Grille.setMinimumSize(new Dimension(this.horizontal,this.vertical));
+        Grille.setMaximumSize(new Dimension(this.horizontal,this.vertical));
         Grille.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         this.layoutOptions(2, 2, this.colonne, this.ligne, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(0, 0, 0, 0));
@@ -289,5 +290,72 @@ public class Vue implements MouseListener {
         return this.VueFenetre;
     }
 
+    public void mouseClicked(MouseEvent e) {
 
+        System.out.println(e.getComponent());
+        Component j = e.getComponent();// Récupere le jeton ayant recu le clique
+        Jeton jeton = (Jeton) j;
+        int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+        this.grille.PrintGrille();
+        switch (numerojoueur) {
+
+            case 1:
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                this.numerojoueur = 2;
+                this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                break;
+
+            case 2:
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                this.numerojoueur = 3;
+                this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                break;
+
+            case 3:
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].repaint();
+                a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
+                this.numerojoueur = 1;
+                this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                break;
+        }
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        if (e.getComponent().getForeground() == Color.BLACK) {
+            if (numerojoueur == 2) {// Tour du joueur Jaune
+                Component j = e.getComponent();// Récupere le jeton ayant recu le clique
+                Jeton jeton = (Jeton) j;
+                int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setForeground(Color.GRAY);
+            } else if (numerojoueur == 1) {// tour du joueur Rouge
+                Component j = e.getComponent();// Récupere le jeton ayant recu le clique
+                Jeton jeton = (Jeton) j;
+                int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setForeground(Color.GRAY);
+            } else if (numerojoueur == 3) {
+                Component j = e.getComponent();// Récupere le jeton ayant recu le clique
+                Jeton jeton = (Jeton) j;
+                int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
+                this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setForeground(Color.GRAY);
+            }
+        }
+    }
+
+    public void mouseExited(MouseEvent e) {
+        if (e.getComponent().getForeground() == Color.gray) {
+            e.getComponent().setForeground(Color.BLACK);
+            System.out.print(" -> Couleur changée \n");
+        }
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
 }
