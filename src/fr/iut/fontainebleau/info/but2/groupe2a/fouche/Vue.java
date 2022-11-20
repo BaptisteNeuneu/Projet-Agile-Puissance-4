@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class Vue implements MouseListener {
     private JFrame VueFenetre;
     private JLabel VueTexte;
+    private JLabel battle;
     private GridBagConstraints gbc;
     private GridBagLayout layout;
     private Grille grille;
@@ -183,18 +184,18 @@ public class Vue implements MouseListener {
 
         final String triple = "1 VS 1 VS 1";
         final String couple = "1 VS 1";
-        JLabel battle = new JLabel();
+        this.battle = new JLabel();
         if (nbJoueur == 3) {
-            battle = new JLabel(triple);
-            battle.setFont(new Font(Font.SERIF, Font.PLAIN, 40));
+            this.battle = new JLabel(triple);
+            this.battle.setFont(new Font(Font.SERIF, Font.PLAIN, 40));
         }
         if (nbJoueur == 2) {
-            battle = new JLabel(couple);
-            battle.setFont(new Font(Font.SERIF, Font.PLAIN, 40));
+            this.battle = new JLabel(couple);
+            this.battle.setFont(new Font(Font.SERIF, Font.PLAIN, 40));
         }
         this.layoutOptions(decalage + 2, 0, nb, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(5, 5, 5, 5));
-        this.VueFenetre.add(battle, this.gbc);
+        this.VueFenetre.add(this.battle, this.gbc);
     }
 
     public void ajouterGrille() {
@@ -297,12 +298,12 @@ public class Vue implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         this.reduireJeton(this.numerojoueur);
         //System.out.println(e.getComponent());
-        //System.out.println(this.premier);
         Component j = e.getComponent();// Récupere le jeton ayant recu le clique
         Jeton jeton = (Jeton) j;
         int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
         //this.grille.PrintGrille();
         this.colorier(jeton,ligneNouveauJeton,this.premier);
+        //System.out.println(this.numerojoueur);
         if(this.a.getPassage()){
             this.premier=(this.numerojoueur%3+1)%3+1;
             this.changement();
@@ -344,8 +345,8 @@ public class Vue implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
     public void changement(){
-        Changement.retirer(this.VueFenetre,this.zoneJaune,this.zoneRouge,this.zoneVert,this.numerojoueur);
-        Changement.retirer(this.VueFenetre,this.dessinJaune,this.dessinRouge,this.dessinVert,this.numerojoueur);
+        Changement.retirer(this.VueFenetre,this.zoneRouge,this.zoneJaune,this.zoneVert,this.numerojoueur);
+        Changement.retirer(this.VueFenetre,this.dessinRouge,this.dessinJaune,this.dessinVert,this.numerojoueur);
         Changement.decoloriser(this.grille,this.numerojoueur);
         Changement.afficher(this.VueFenetre);
     }
@@ -359,6 +360,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 2;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                    this.VueTexte.setText("Joueur 2 : Couleur Jaune");
                     break;
                 case 2:
                     this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
@@ -366,6 +368,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 3;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                    this.VueTexte.setText("Joueur 3 : Couleur Vert");
                     break;
                 case 3:
                     this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
@@ -373,6 +376,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 1;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                    this.VueTexte.setText("Joueur 1 : Couleur Rouge");
                     break;
             }
         }
@@ -384,6 +388,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 3;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                    this.VueTexte.setText("Joueur 3 : Couleur Vert");
                     break;
                 case 3:
                     this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
@@ -391,6 +396,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 2;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                    this.VueTexte.setText("Joueur 2 : Couleur Jaune");
                     break;
             }
         }
@@ -402,6 +408,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 3;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Vert");
+                    this.VueTexte.setText("Joueur 3 : Couleur Vert");
                     break;
                 case 3:
                     this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('v');
@@ -409,6 +416,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 1;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                    this.VueTexte.setText("Joueur 1 : Couleur Rouge");
                     break;
             }
         }
@@ -420,6 +428,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 2;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Jaune");
+                    this.VueTexte.setText("Joueur 2 : Couleur Jaune");
                     break;
                 case 2:
                     this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('j');
@@ -427,6 +436,7 @@ public class Vue implements MouseListener {
                     a.CoupVictorieux(jeton.getColonne(), ligneNouveauJeton, numerojoueur);
                     this.numerojoueur = 1;
                     this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
+                    this.VueTexte.setText("Joueur 1 : Couleur Rouge");
                     break;
             }
         }

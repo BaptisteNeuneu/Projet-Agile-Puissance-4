@@ -7,19 +7,19 @@ import java.awt.event.*;
 
 public class Changement{
     public static void retirer(JFrame f,JLabel r,JLabel j,JLabel v,int n){
-        if(n==1){
+        if(n==2){
             f.remove(r);
             f.revalidate();
             Changement.augmenter(j);
             Changement.augmenter(v);
         }
-        if(n==2){
+        if(n==3){
             f.remove(j);
             f.revalidate();
             Changement.augmenter(r);
             Changement.augmenter(v);
         }
-        if(n==3){
+        if(n==1){
             f.remove(v);
             f.revalidate();
             Changement.augmenter(r);
@@ -27,15 +27,15 @@ public class Changement{
         }
     }
     public static void retirer(JFrame f,DessinJeton r,DessinJeton j,DessinJeton v,int n){
-        if(n==1){
+        if(n==2){
             f.remove(r);
             f.revalidate();
         }
-        if(n==2){
+        if(n==3){
             f.remove(j);
             f.revalidate();
         }
-        if(n==3){
+        if(n==1){
             f.remove(v);
             f.revalidate();
         }
