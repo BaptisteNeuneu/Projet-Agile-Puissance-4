@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Model {
     char value;
     boolean victoire = false;
-    int nbJoueur=3;
+    boolean passage=false;
 
 
 
@@ -34,7 +34,7 @@ public class Model {
             System.out.println("Le joueur" + numerojoueur + " a gagné le 1 vc 1");
             return;   
         } else {
-            this.nbJoueur=2;
+            this.passage=true;
             JOptionPane.showMessageDialog(fenetre, "Vicoire du joueur " + numerojoueur);
             System.out.println("Le joueur " + numerojoueur + " a gagné");
             System.out.println("lancement partie 2");
@@ -178,8 +178,12 @@ public class Model {
         Popup2();
     }
 
-    public int getNbJoueur(){
-        return this.nbJoueur;
+    public void setPassage(boolean p){
+        this.passage=p;
+    }
+
+    public boolean getPassage(){
+        return this.passage;
     }
 
 }

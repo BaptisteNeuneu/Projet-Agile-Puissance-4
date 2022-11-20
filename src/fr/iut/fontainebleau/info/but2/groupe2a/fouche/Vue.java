@@ -22,6 +22,9 @@ public class Vue implements MouseListener {
     private JLabel zoneRouge;
     private JLabel zoneVert;
     private short numerojoueur = 1;
+    private DessinJeton dessinRouge;
+    private DessinJeton dessinJaune;
+    private DessinJeton dessinVert;
 
     /*
      * Le constructeur Vue prend comme paramètre dans l'ordre la longueur des cases,
@@ -123,11 +126,11 @@ public class Vue implements MouseListener {
         this.zoneJaune = new JLabel(texte);
         this.zoneRouge = new JLabel(texte);
         this.zoneVert = new JLabel(texte);
-        DessinJeton dessinJaune = new DessinJeton(Color.YELLOW);
+        this.dessinJaune = new DessinJeton(Color.YELLOW);
         dessinJaune.setPreferredSize(new Dimension(110, 110));
-        DessinJeton dessinRouge = new DessinJeton(Color.RED);
+        this.dessinRouge = new DessinJeton(Color.RED);
         dessinRouge.setPreferredSize(new Dimension(110, 110));
-        DessinJeton dessinVert = new DessinJeton(Color.GREEN);
+        this.dessinVert = new DessinJeton(Color.GREEN);
         dessinVert.setPreferredSize(new Dimension(110, 110));
 
         this.layoutOptions(this.colonne + 2, 2, 2, 2, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
@@ -322,6 +325,10 @@ public class Vue implements MouseListener {
                 this.VueFenetre.setTitle("Puissance 4 : Tour du joueur Rouge");
                 break;
         }
+        if(this.a.getPassage()){
+            this.changement();
+            this.a.setPassage(false);
+        }
     }
 
     public void mousePressed(MouseEvent e) {
@@ -356,5 +363,9 @@ public class Vue implements MouseListener {
     }
 
     public void mouseReleased(MouseEvent e) {
+    }
+    public void changement(){
+        Changement.retirer(this.VueFenetre,this.zoneJaune,this.zoneRouge,this.zoneVert,this.numerojoueur);
+        Changement.retirer(this.VueFenetre,this.dessinJaune,this.dessinRouge,this.dessinVert,this.numerojoueur);
     }
 }
