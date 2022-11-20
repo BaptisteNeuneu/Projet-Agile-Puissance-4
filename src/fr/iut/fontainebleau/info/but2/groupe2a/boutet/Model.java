@@ -178,7 +178,7 @@ public class Model {
         Popup2();
     }
 
-    public getNbJoueur(){
+    public int getNbJoueur(){
         return this.nbJoueur;
     }
 
