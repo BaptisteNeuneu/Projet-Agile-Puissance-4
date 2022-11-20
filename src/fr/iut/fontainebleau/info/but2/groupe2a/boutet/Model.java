@@ -8,6 +8,7 @@ import javax.swing.*;
 public class Model {
     char value;
     boolean victoire = false;
+    int nbJoueur=3;
 
 
 
@@ -33,6 +34,7 @@ public class Model {
             System.out.println("Le joueur" + numerojoueur + " a gagné le 1 vc 1");
             return;   
         } else {
+            this.nbJoueur=2;
             JOptionPane.showMessageDialog(fenetre, "Vicoire du joueur " + numerojoueur);
             System.out.println("Le joueur " + numerojoueur + " a gagné");
             System.out.println("lancement partie 2");
@@ -174,6 +176,10 @@ public class Model {
         }
         System.out.println("La partie est null");
         Popup2();
+    }
+
+    public getNbJoueur(){
+        return this.nbJoueur;
     }
 
 }
