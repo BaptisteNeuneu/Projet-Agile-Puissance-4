@@ -132,17 +132,17 @@ public class Vue implements MouseListener {
 
         this.layoutOptions(this.colonne + 2, 2, 2, 2, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(5, 5, 5, 5));
-        this.VueFenetre.add(zoneJaune, this.gbc);
+        this.VueFenetre.add(zoneRouge, this.gbc);
         this.layoutOptions(this.colonne + 2, 2, 2, 2, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(5, 5, 5, 5));
-        this.VueFenetre.add(dessinJaune, this.gbc);
+        this.VueFenetre.add(dessinRouge, this.gbc);
 
         this.layoutOptions(this.colonne + 2, 4, 2, 2, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(5, 5, 5, 5));
-        this.VueFenetre.add(zoneRouge, this.gbc);
+        this.VueFenetre.add(zoneJaune, this.gbc);
         this.layoutOptions(this.colonne + 2, 4, 2, 2, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(5, 5, 5, 5));
-        this.VueFenetre.add(dessinRouge, this.gbc);
+        this.VueFenetre.add(dessinJaune, this.gbc);
 
         this.layoutOptions(this.colonne + 2, 6, 2, 2, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(5, 5, 5, 5));
@@ -263,26 +263,25 @@ public class Vue implements MouseListener {
 
     public void reduireJeton(int i) {
         if (i == 1) {
-            String texte = this.zoneJaune.getText();
-            int n = Integer.parseInt(texte);
-            n = n - 1;
-            System.out.println(n);
-            texte = Integer.toString(n);
-            this.zoneJaune.setText(texte);
-        }
-        if (i == 2) {
             String texte = this.zoneRouge.getText();
             int n = Integer.parseInt(texte);
             n = n - 1;
             texte = Integer.toString(n);
-            this.zoneRouge = new JLabel(texte);
+            this.zoneRouge.setText(texte);
+        }
+        if (i == 2) {
+            String texte = this.zoneJaune.getText();
+            int n = Integer.parseInt(texte);
+            n = n - 1;
+            texte = Integer.toString(n);
+            this.zoneJaune.setText(texte);
         }
         if (i == 3) {
             String texte = this.zoneVert.getText();
             int n = Integer.parseInt(texte);
             n = n - 1;
             texte = Integer.toString(n);
-            this.zoneVert = new JLabel(texte);
+            this.zoneVert.setText(texte);
         }
     }
 
@@ -291,13 +290,13 @@ public class Vue implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-
+        this.reduireJeton(this.numerojoueur);
         System.out.println(e.getComponent());
         Component j = e.getComponent();// Récupere le jeton ayant recu le clique
         Jeton jeton = (Jeton) j;
         int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
-        this.grille.PrintGrille();
-        switch (numerojoueur) {
+        //this.grille.PrintGrille();
+        switch (this.numerojoueur) {
 
             case 1:
                 this.grille.getGrille()[jeton.getColonne()][ligneNouveauJeton].setValue('r');
