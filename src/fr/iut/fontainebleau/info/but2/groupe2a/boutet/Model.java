@@ -11,7 +11,7 @@ public class Model {
 
 
 
-    private Grille grille = new Grille();
+    private Grille grille = new Grille(0,0);
     private JFrame fenetre = new JFrame();
 
     public Model(Grille grille, JFrame fenetre) {

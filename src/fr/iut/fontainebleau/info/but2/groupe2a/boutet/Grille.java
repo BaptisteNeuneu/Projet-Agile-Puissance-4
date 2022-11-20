@@ -4,6 +4,8 @@ public class Grille {
     /* Taille légale de la grille (selon les règles) */
     protected int nombreLigne = 6; // rows
     protected int nombreColonne = 7; // collumns
+    protected int width = 1050; //width
+    protected int height = 660; //height
 
     /* Création de la grille avec les dimensions règlementaire */
     protected Jeton grille[][] ;
@@ -17,11 +19,13 @@ public class Grille {
      * +- 'r' : Jeton rouge dans cette case
      * +- 'j' : Jeton jaune dans cette case
      */
-    public Grille() {
+    public Grille(int width,int height) {
+        this.width=width;
+        this.height=height;
         this.grille = new Jeton[nombreColonne][nombreLigne];
         for (int i = 0; i < nombreColonne; i++) {
             for (int j = 0; j < nombreLigne; j++) {
-                Jeton jeton = new Jeton(i,j,'-');
+                Jeton jeton = new Jeton(i,j,'-',this.width/this.nombreColonne,this.height/this.nombreLigne);
                 this.grille[i][j]=jeton;
             }
         }
@@ -70,5 +74,12 @@ public class Grille {
             }
         }
         return i;
+    }
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 }
