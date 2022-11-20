@@ -99,6 +99,20 @@ public class Grille {
             }
         }
     }
+
+    public void Down(){
+        for (int i =0; i < nombreColonne; i++) {
+            for (int j = 1; j < nombreLigne; j++) {
+                char temp=this.grille[i][j-1].getValue();
+                if(temp=='-'){
+                        temp=this.grille[i][j].getValue();
+                        this.grille[i][j-1].setValue(temp);
+                        this.grille[i][j].setValue('-');
+                        this.grille[i][j].repaint();
+                }
+            }
+        }
+    }
     public int getWidth() {
         return this.width;
     }

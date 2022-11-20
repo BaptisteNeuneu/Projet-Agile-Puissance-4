@@ -37,9 +37,9 @@ public class Jeton extends JPanel {
         }
         //System.out.println(this.getWidth()*this.getColonne());
         if(this.getWidth()<this.getHeight()){
-            g.fillOval(0,0,this.getWidth()-4,this.getWidth()-4);
+            g.fillOval(2,(this.getHeight()-this.getWidth())/2+2,this.getWidth()-4,this.getWidth()-4);
         }else{
-            g.fillOval(0,0,this.getHeight()-4,this.getHeight()-4);
+            g.fillOval((this.getWidth()-this.getHeight())/2+2,2,this.getHeight()-4,this.getHeight()-4);
         }
         //g.fillOval(0, 0, this.getWidth() - 4, this.getHeight() - 4);
     }

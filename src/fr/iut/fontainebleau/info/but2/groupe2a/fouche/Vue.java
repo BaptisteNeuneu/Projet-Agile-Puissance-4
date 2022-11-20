@@ -345,9 +345,13 @@ public class Vue implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
     public void changement(){
+        this.battle.setText("1 VS 1");
         Changement.retirer(this.VueFenetre,this.zoneRouge,this.zoneJaune,this.zoneVert,this.numerojoueur);
         Changement.retirer(this.VueFenetre,this.dessinRouge,this.dessinJaune,this.dessinVert,this.numerojoueur);
         Changement.decoloriser(this.grille,this.numerojoueur);
+        for(int i=0;i<7;i++){
+            this.grille.Down();
+        }
         Changement.afficher(this.VueFenetre);
     }
 
