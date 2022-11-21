@@ -311,7 +311,11 @@ public class Model {
             cy--;
         }
 
-        if()
+        if(victoirerouge >= 1 && victoirejaune >= 1 || victoirerouge >=1 && victoirevert >= 1 || victoirejaune >= 1 && victoirevert >= 1 ){
+            JOptionPane.showMessageDialog(fenetre, "Il y a égalité");
+            return;
+        } else if (victoirerouge >= 1 ||)
+
         }
     }
 
