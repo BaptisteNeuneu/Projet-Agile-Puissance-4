@@ -166,6 +166,155 @@ public class Model {
         CheckNull();
     }
 
+        public void TestVictoire(int colonne, int ligne) {
+        
+         int jetonvictorieu = 3;
+          if(victoire == true){
+          jetonvictorieu = 4;
+          }
+
+        int victoirerouge = 0;
+        int victoirejaune = 0;
+        int victoirevert = 0;
+
+        for(int numerojoueur = 1;numerojoueur >=0 ; numerojoueur++){
+        switch (numerojoueur) {
+
+            case 1:
+                value = 'r';
+                break;
+
+            case 2:
+                value = 'j';
+                break;
+
+            case 3:
+                value = 'v';
+                break;
+        }
+
+        // Vertical win ?
+        int count = 0;
+        for
+        for (int i = 0; i < 6; i++) {
+            if (this.grille.getGrille()[colonne][i].getValue() == value)
+                count++;
+            else
+                count = 0;
+            if (count == jetonvictorieu) {
+                switch(numerojoueur){
+                    case 1:
+                    victoirerouge = victoirerouge +1;
+
+                    case 2:
+                    victoirejaune = victoirejaune +1;
+
+                    case 3:
+                    victoirevert = victoirevert+1;
+                }
+            }
+        }
+
+        // Horizontal win ?
+        count = 0;
+        for (int i = 0; i < 7; i++) {
+            if (this.grille.getGrille()[i][ligne].getValue() == value)
+                count++;
+            else
+                count = 0;
+            if (count == jetonvictorieu) {
+                switch(numerojoueur){
+                    case 1:
+                    victoirerouge = victoirerouge +1;
+
+                    case 2:
+                    victoirejaune = victoirejaune +1;
+
+                    case 3:
+                    victoirevert = victoirevert+1;
+                }
+            }
+        }
+
+        // Up Left --> Down Right win ?
+
+        int cx = colonne;
+        int cy = ligne;
+
+        while (true) {
+            if (cx == 0 || cy == 0)
+                break;
+            cx--;
+            cy--;
+        }
+
+        count = 0;
+        while (true) {
+            if (cx > 6 || cy > 5)
+                break;
+
+            if (this.grille.getGrille()[cx][cy].getValue() == value)
+                count++;
+            else
+                count = 0;
+            if (count == jetonvictorieu) {
+                switch(numerojoueur){
+                    case 1:
+                    victoirerouge = victoirerouge +1;
+
+                    case 2:
+                    victoirejaune = victoirejaune +1;
+
+                    case 3:
+                    victoirevert = victoirevert+1;
+                }
+            }
+
+            cx++;
+            cy++;
+        }
+
+        // Down Left --> Up Right win ?
+
+        cx = colonne;
+        cy = ligne;
+
+        count = 0;
+        while (true) {
+            if (cx == 0 || cy == 5)
+                break;
+            cx--;
+            cy++;
+        }
+
+        while (true) {
+            if (cx > 6 || cy < 0)
+                break;
+            if (this.grille.getGrille()[cx][cy].getValue() == value)
+                count++;
+            else
+                count = 0;
+            if (count == jetonvictorieu) {
+                switch(numerojoueur){
+                    case 1:
+                    victoirerouge = victoirerouge +1;
+
+                    case 2:
+                    victoirejaune = victoirejaune +1;
+
+                    case 3:
+                    victoirevert = victoirevert+1;
+                }
+            }
+
+            cx++;
+            cy--;
+        }
+
+        if()
+        }
+    }
+
     public void CheckNull() {
         char a = '-';
         for (int x = 0; x < 7; x++) {
