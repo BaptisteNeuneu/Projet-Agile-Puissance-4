@@ -10,10 +10,13 @@ public class Model {
     boolean victoire = false;
     boolean passage=false;
     int nbJoueur=3;
+    int victoirerouge = 0;
+    int victoirejaune = 0;
+    int victoirevert = 0;
 
 
 
-    private Grille grille = new Grille(0,0);
+    private Grille grille = new Grille(0, 0);
     private JFrame fenetre = new JFrame();
 
     public Model(Grille grille, JFrame fenetre) {
@@ -31,9 +34,9 @@ public class Model {
 
     private void Popup(int numerojoueur) {
         if (victoire == true) {
-            JOptionPane.showMessageDialog(fenetre, "Le joueur" + numerojoueur + "a gagné le 1 vc 1");
+            JOptionPane.showMessageDialog(fenetre, "Le joueur" + numerojoueur + "a gagné le 1 vs 1");
             System.out.println("Le joueur" + numerojoueur + " a gagné le 1 vc 1");
-            return;   
+            System.exit(1);  
         } else {
             this.passage=true;
             this.nbJoueur=2;
@@ -42,11 +45,13 @@ public class Model {
             System.out.println("lancement partie 2");
             victoire = true;
             // Partie2(numerojoueur);
+            return;
         }
     }
 
     private void Popup2() {
          JOptionPane.showMessageDialog(fenetre,"Personne ne gagne");
+         System.exit(1);
     }
 
     /**
@@ -166,16 +171,16 @@ public class Model {
         CheckNull();
     }
 
+        /**
+         * @param colonne
+         * @param ligne
+         */
         public void TestVictoire(int colonne, int ligne) {
         
          int jetonvictorieu = 3;
           if(victoire == true){
           jetonvictorieu = 4;
           }
-
-        int victoirerouge = 0;
-        int victoirejaune = 0;
-        int victoirevert = 0;
 
         for(int numerojoueur = 1;numerojoueur >=0 ; numerojoueur++){
         switch (numerojoueur) {
@@ -195,7 +200,6 @@ public class Model {
 
         // Vertical win ?
         int count = 0;
-        for
         for (int i = 0; i < 6; i++) {
             if (this.grille.getGrille()[colonne][i].getValue() == value)
                 count++;
@@ -310,14 +314,32 @@ public class Model {
             cx++;
             cy--;
         }
+        if(ligne == 6 && colonne == 7){
+            vic(victoirerouge,victoirejaune,victoirevert);
+        }
 
+
+    }
+}
+
+    public void vic(int victoirerouge, int victoirejaune, int victoirevert){
         if(victoirerouge >= 1 && victoirejaune >= 1 || victoirerouge >=1 && victoirevert >= 1 || victoirejaune >= 1 && victoirevert >= 1 ){
             JOptionPane.showMessageDialog(fenetre, "Il y a égalité");
             return;
-        } else if (victoirerouge >= 1 ||)
-
+        } else if (victoirerouge >= 1){
+            JOptionPane.showMessageDialog(fenetre, "Le joueur rouge a gagné le duel");
+            return;
+        } else if (victoirejaune >=1){
+            JOptionPane.showMessageDialog(fenetre, "Le joueur jaune a gagné le duel");
+            return;
+        }else if(victoirevert >= 1){
+            JOptionPane.showMessageDialog(fenetre, "Le joueur vert a gagné le duel");
+            return;
+        } else{
+            return;
         }
-    }
+        }
+
 
     public void CheckNull() {
         char a = '-';
