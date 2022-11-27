@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
-
+//La classe LecteurXPM consiste à lire le fichier fleches.xpm
 public class  LecteurXPM {
     private int nb_x;
     private int nb_y;
