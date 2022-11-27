@@ -3,7 +3,7 @@ import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
 
 import java.awt.*;
 import javax.swing.*;
-
+//La classeExtension permet de récupérer la classe View et de l'appeler 
 public class Extension extends View{
     private JPanel p; 
     public Extension(int l,int h){
