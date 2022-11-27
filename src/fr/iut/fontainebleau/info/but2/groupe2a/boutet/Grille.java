@@ -75,6 +75,12 @@ public class Grille {
         }
         return i;
     }
+    /**
+     * Permet de supprimer les jetons visuellement de la grille quand en le redessinant en noir et 
+     * ensuite on modifie la grille pour que les jetons qui ont été effacés du visuel soit supprimé
+     * du tableau Grile lui même.
+     * @param c : Le charactere à supprimer dans la grille.
+     */
     public void removeColor(char c){
         for (int i = 0; i < nombreColonne; i++) {
             for (int j = 0; j < nombreLigne; j++) {
