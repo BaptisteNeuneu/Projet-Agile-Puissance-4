@@ -8,6 +8,14 @@ public class Jeton extends JPanel {
     private char value;
     private int colonne, ligne,width,height;
 
+    /**
+     * Initialise le jeton.
+     * @param colonne : sa position dans la grille(colonne).
+     * @param ligne : sa position dans la grille (ligne).
+     * @param value : sa valeur.
+     * @param width : sa largeur.
+     * @param height : sa longueur.
+     */
     public Jeton(int colonne, int ligne, char value, int width, int height) {
         this.colonne = colonne;
         this.ligne = ligne;
@@ -18,6 +26,10 @@ public class Jeton extends JPanel {
         setOpaque(false);
     }
 
+    /**
+     * Repeint le composant pour lui creer une forme de cercle.
+     * @param g : le composant à modifier.
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // System.out.println("Jeton ajouté !");
@@ -44,6 +56,8 @@ public class Jeton extends JPanel {
         //g.fillOval(0, 0, this.getWidth() - 4, this.getHeight() - 4);
     }
 
+    /* -------------  Getteurs  -------------*/
+    /* Je pense que leurs noms sont assez explicit pour ne pas avoir à les commenter */
     public void setValue(char c) {
         this.value = c;
     }
