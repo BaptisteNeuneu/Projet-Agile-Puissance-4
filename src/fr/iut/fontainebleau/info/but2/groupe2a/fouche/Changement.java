@@ -1,11 +1,14 @@
 package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
-/*Voici la fonction Vue elle ouvre une fenètre avec une fausse grille dedans*/
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+//La classe changement indique ce que la fonction doit faire lrs de la victoire de l'un des joueurs 
 public class Changement{
+
+    //Les fonctions retirer enleve respectivement le JLabel et le DessinJeton du joueur qui a gagné
     public static void retirer(JFrame f,JLabel r,JLabel j,JLabel v,int n){
         if(n==2){
             f.remove(r);
@@ -40,6 +43,7 @@ public class Changement{
             f.revalidate();
         }
     }
+    //La fonction augmenter rajoute 7 jetons chaque joueur pour compléter la grille dans sa totalité
     public static void augmenter(JLabel t){
             String texte = t.getText();
             int n = Integer.parseInt(texte);
@@ -47,7 +51,7 @@ public class Changement{
             texte = Integer.toString(n);
             t.setText(texte);
     }
-
+    //La fonction décoloriser appelle la fonction remove color pour retirer une couleur de la grille
     public static void decoloriser(Grille g,int n)
     {
         if(n==2){
@@ -60,7 +64,7 @@ public class Changement{
             g.removeColor('v');
         }
     }
-
+    //La fonction afficher aiche  nouveau la fenêtre 
     public static void afficher(JFrame f){
         f.setVisible(false);
         f.setVisible(true);
