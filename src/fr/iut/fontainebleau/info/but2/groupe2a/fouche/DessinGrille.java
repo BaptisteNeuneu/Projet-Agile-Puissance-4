@@ -1,4 +1,5 @@
-package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
+//a supprimer
+/*package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -22,4 +23,4 @@ public class DessinGrille extends JComponent{
       secondPinceau.fillOval(t_v/10+(t_h-t_v)/2,t_v/10,t_v-t_v/5,t_v-t_v/5);
     }
   }
-}
+}*/
