@@ -2,7 +2,7 @@ package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
- 
+//La classe odal va apelé la fenêtre d'aide
 public class Modal extends JComponent{
     //private Color couleur;
     public Modal(Vue f) {
