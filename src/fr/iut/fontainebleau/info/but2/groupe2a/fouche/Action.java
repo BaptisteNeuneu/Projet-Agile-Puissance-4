@@ -6,6 +6,7 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+//La class Action est un MouseListener en plus de la vue pour appeler la fenetre aide
 public class Action implements MouseListener{
     private Vue fenetre;
     public Action(Vue f){
@@ -23,7 +24,7 @@ public class Action implements MouseListener{
     public void mouseReleased(MouseEvent e){
         
     }
-
+    //On appelle la fonction aidedans le MousePressed 
     public void mousePressed(MouseEvent e){
         System.out.println(e.getX());
         System.out.println(e.getY());
