@@ -17,6 +17,11 @@ public class View implements MouseListener {
 
     private int numerojoueur = 1; // tour du joueur jaune turn=false | tour du joueur rouge turn=true
 
+    /**
+     * Création de la fenêtre et de tout ses composants.
+     * @param x : la largeur de la fenêtre.
+     * @param y : la hauteur de la fenêtre.
+     */
     public View(int x, int y) {
 
         /* la fenetre */
@@ -70,6 +75,9 @@ public class View implements MouseListener {
         /* le bouton */
     }
 
+    /**
+     * Rend la fenêtre visible.
+     */
     public void affichage() {
         this.fenetre.setVisible(true);
     }
@@ -108,9 +116,18 @@ public class View implements MouseListener {
         }
     }
 
+    /** 
+     * Quand l'utilisateur passe sa souris sur une case.
+     * @param e : l'évènement de la souris, dans le cas présent un passage sur un composant.
+     */
     public void mousePressed(MouseEvent e) {
     }
 
+    /**
+     * Quand l'utilisateur clique sur la grille, en fonction de la position du curseur dans la grille par colonne,
+     * le jeton tombe dans la grille pour aller le plus bas possible avant de rencontrer un jeton obstacle.
+     * @param e : l'évènement de la souris, dans le cas présent un clic sur un composant de la grille.
+     */
     public void mouseEntered(MouseEvent e) {
         if (e.getComponent().getForeground() == Color.BLACK) {
             if (numerojoueur == 2) {// Tour du joueur Jaune
@@ -131,14 +148,20 @@ public class View implements MouseListener {
             }
         }
     }
-
+    /**
+     * Quand le curseur sors d'une case vide elle est repeinte en noir si elle était grise.
+     * @param e : l'évènement de la souris, dans le cas présent le curseur qui quitte un composant.
+     */
+    /* Plus utile pour le moment, fut un temps la case sélectionnée se grisait au passage de la souris */
     public void mouseExited(MouseEvent e) {
         if (e.getComponent().getForeground() == Color.gray) {
             e.getComponent().setForeground(Color.BLACK);
             System.out.print(" -> Couleur changée \n");
         }
     }
-
+    /**
+     * @param e : évènement de la souris, dans le cas présent un relachement du clic de la souris.
+     */
     public void mouseReleased(MouseEvent e) {
     }
 }
