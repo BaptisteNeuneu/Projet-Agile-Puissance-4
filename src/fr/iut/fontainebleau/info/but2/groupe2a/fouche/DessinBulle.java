@@ -2,7 +2,8 @@ package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
- 
+
+//La class DessinBulle dessine une bulle avec du texte à l'intérieur
 public class DessinBulle extends JComponent{
     //private Color couleur;
     public DessinBulle() {
