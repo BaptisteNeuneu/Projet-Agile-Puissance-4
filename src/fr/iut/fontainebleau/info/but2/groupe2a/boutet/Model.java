@@ -48,14 +48,16 @@ public class Model {
             return;
         }
     }
-
+    /**
+     * Affiche que la partie est nulle
+     */
     private void Popup2() {
          JOptionPane.showMessageDialog(fenetre,"Personne ne gagne");
          System.exit(1);
     }
 
     /**
-     * Vérifie
+     * Vérifie la victoire
      * 
      * @param colonne
      * @param ligne
@@ -83,7 +85,9 @@ public class Model {
                 break;
         }
 
-        // Vertical win ?
+        /**
+         * Vérifie si la victoire est vertical
+         */
         int count = 0;
         for (int i = 0; i < 6; i++) {
             if (this.grille.getGrille()[colonne][i].getValue() == value)
@@ -96,7 +100,9 @@ public class Model {
             }
         }
 
-        // Horizontal win ?
+        /**
+         * Vérifie si la victoire est horizontal
+         */
         count = 0;
         for (int i = 0; i < 7; i++) {
             if (this.grille.getGrille()[i][ligne].getValue() == value)
@@ -109,7 +115,9 @@ public class Model {
             }
         }
 
-        // Up Left --> Down Right win ?
+        /**
+         * Vérifie si la victoire est sur la diagonale en haut à gauche à en bas droite
+         */
 
         int cx = colonne;
         int cy = ligne;
@@ -139,7 +147,9 @@ public class Model {
             cy++;
         }
 
-        // Down Left --> Up Right win ?
+        /**
+         * Vérifie si la victoire est sur la diagonale en bas à gauche vers en haut à droite
+         */
 
         cx = colonne;
         cy = ligne;
@@ -174,6 +184,10 @@ public class Model {
         /**
          * @param colonne
          * @param ligne
+         */
+        /**
+         * Similaire à ce qui se trouvait au dessus mais devais être utiliser
+         * pour vérifier lors de la descente des jetons mais la fonction est bloquante et on a pas compris où
          */
         public void TestVictoire(int colonne, int ligne) {
         
@@ -340,7 +354,9 @@ public class Model {
         }
         }
 
-
+        /**
+         * Vérifie si la partie est nulle
+         */
     public void CheckNull() {
         char a = '-';
         for (int x = 0; x < 7; x++) {
