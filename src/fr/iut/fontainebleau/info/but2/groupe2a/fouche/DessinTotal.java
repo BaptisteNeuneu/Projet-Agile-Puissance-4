@@ -2,7 +2,7 @@ package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
- 
+//Cette classe dessine le fichier fleches.xpm dans la fenêtre pour l'instant elle n'est pas utilisée
 public class DessinTotal extends JComponent{
     private LecteurXPM bouton;
     private String[] portrait;
