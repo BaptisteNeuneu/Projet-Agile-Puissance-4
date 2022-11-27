@@ -1,3 +1,5 @@
+//a supprimer
+
 /*package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 
 import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
