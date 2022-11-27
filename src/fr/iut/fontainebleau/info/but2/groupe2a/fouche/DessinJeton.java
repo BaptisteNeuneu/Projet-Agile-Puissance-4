@@ -2,7 +2,8 @@ package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
- 
+
+//La classe DessinJeton dessine les compteurs de jetons à droite ee la grille 
 public class DessinJeton extends JComponent{
     private Color couleur;
     public DessinJeton(Color c) {
