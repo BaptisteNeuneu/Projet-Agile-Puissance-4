@@ -1,6 +1,6 @@
 package src.fr.iut.fontainebleau.info.but2.groupe2a.fouche;
 
-/*Voici la fonction Vue elle ouvre une fenètre avec une fausse grille dedans*/
+/*Voici la fonction Vue elle ouvre une fenêtre qui va appeler la grille*/
 import java.awt.*;
 import src.fr.iut.fontainebleau.info.but2.groupe2a.boutet.*;
 import javax.swing.*;
@@ -29,9 +29,7 @@ public class Vue implements MouseListener {
     private int premier;
 
     /*
-     * Le constructeur Vue prend comme paramètre dans l'ordre la longueur des cases,
-     * la hauteur des cases, le nombre de colonnes, le nombre de lignes, la longueur
-     * de la fenetre, la hauteur de la fenetre,
+     * Le constructeur Vue crée une fenetre avec une taille fixe et une grille avec une taille fixe
      */
     public Vue() {
         this.premier=0;
@@ -75,7 +73,7 @@ public class Vue implements MouseListener {
 
         this.VueFenetre.addMouseListener(new Action(this));
     }
-
+    //L'affichage de la fenêtre
     public void affichage() {
         this.VueFenetre.setVisible(true);
     }
@@ -99,25 +97,25 @@ public class Vue implements MouseListener {
     }
 
     /*
-     * C'est une fonction qui remplit les lignes et les colonnes pour placer les
+     * C'est une fonction qui remplit les lignes et les colonnes de vide pour placer les
      * éléments au bon endroit
      */
     public void creerVide(int x, int y) {
         JPanel espace = new JPanel();
         espace.setPreferredSize(new Dimension(this.horizontal / this.colonne, this.vertical / this.ligne));
-        espace.setBackground(/* Color.BLACK */new Color(220, 220, 220));
+        espace.setBackground(new Color(220, 220, 220));
         this.layoutOptions(x, y, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(0, 0, 0, 0));
         this.VueFenetre.add(espace, this.gbc);
     }
-
+    //On ajoute un bouton aide  
     public void ajouterAide() {
         JButton aide = new JButton("Aide");
         this.layoutOptions(0, this.ligne + 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER, 0.0, 0.0,
                 new Insets(0, 0, 0, 0));
         this.VueFenetre.add(aide, this.gbc);
     }
-
+    //On ajoute les compteurs de jetons 
     public void ajouterJeton(int nbJoueur) {
         String texte = "";
         if (nbJoueur == 2) {
@@ -158,11 +156,9 @@ public class Vue implements MouseListener {
         this.VueFenetre.add(dessinVert, this.gbc);
 
     }
-
+    //On ajoute le texte dans la fenêtre
     public void ajouterTexte(int numeroJoueur, int decalage, int nb) {
         int nbJoueur = 3;
-
-        /* la VueTexte */
         final String joueur1 = "Joueur 1 : rouge";
         final String joueur2 = "Joueur 2 : jaune";
         final String joueur3 = "Joueur 3 : vert";
@@ -197,10 +193,9 @@ public class Vue implements MouseListener {
                 new Insets(5, 5, 5, 5));
         this.VueFenetre.add(this.battle, this.gbc);
     }
-
+    //On ajoute la grille à la fenetre
     public void ajouterGrille() {
         this.grille = new Grille(this.horizontal,this.vertical);
-        //grille.PrintGrille();
         this.a = new Model(this.grille, this.VueFenetre);
         JPanel Grille = new JPanel();
         Grille.setLayout(new GridBagLayout());
@@ -214,11 +209,7 @@ public class Vue implements MouseListener {
         for (int i = grille.getNombreLigne()-1; i >= 0; i--) {
             for (int j =  grille.getNombreColonne()-1; j >=0; j--) {
                 Jeton jeton = this.grille.getJeton(j, i);
-                // System.out.println("x = " + jeton.getLigne() + " y = " + jeton.getColonne() +
-                // " Value = " + jeton.getValue());
                 jeton.addMouseListener(this);
-                //System.out.println(this.horizontal/this.colonne*i);
-                //System.out.println(this.vertical/this.ligne*j);
                 gbc.gridx = this.horizontal/this.colonne*i;
                 gbc.gridy = this.vertical/this.ligne*j;
                 gbc.ipadx = 0;
@@ -239,34 +230,19 @@ public class Vue implements MouseListener {
                 new Insets(0, 0, 0, 0));
         this.VueFenetre.add(Grille, this.gbc);
     }
-
+    //On crée la fenêtre
     public void ajouterFenetre() {
 
-        /* la VueFenetre */
         this.VueFenetre = new JFrame();
         this.VueFenetre.setSize(1920, 1080);
         this.VueFenetre.setLocation(0, 0);
         this.VueFenetre.getContentPane().setBackground(/* Color.WHITE */new Color(220, 220, 220));
 
-        /* le gestionnaire */
         this.layout = new GridBagLayout();
         this.gbc = new GridBagConstraints();
         this.VueFenetre.setLayout(layout);
     }
-
-    /*
-     * public void selectionner(int n1,int n2){
-     * for(int i=0;i<this.ligne*this.colonne;i++){
-     * DessinGrille test=new
-     * DessinGrille(this.horizontal/this.colonne,this.vertical/this.ligne);
-     * test.setPreferredSize(new
-     * Dimension(this.horizontal/this.colonne,this.vertical/this.ligne));
-     * //System.out.println(test.getPreferredSize());
-     * Grille.add(test);
-     * }
-     * }
-     */
-
+    //On réduit le nombre de jetons à chaque clic
     public void reduireJeton(int i) {
         if (i == 1) {
             String texte = this.zoneRouge.getText();
@@ -290,30 +266,22 @@ public class Vue implements MouseListener {
             this.zoneVert.setText(texte);
         }
     }
-
+    //On récupèe la fenêtre
     public JFrame getFrame() {
         return this.VueFenetre;
     }
-
+    //On colorie les jetons un par un
     public void mouseClicked(MouseEvent e) {
         this.reduireJeton(this.numerojoueur);
-        //System.out.println(e.getComponent());
         Component j = e.getComponent();// Récupere le jeton ayant recu le clique
         Jeton jeton = (Jeton) j;
         int ligneNouveauJeton = this.grille.getLowestJeton(jeton);
-        //this.grille.PrintGrille();
         this.colorier(jeton,ligneNouveauJeton,this.premier);
-        //System.out.println(this.numerojoueur);
         if(this.a.getPassage()){
             this.premier=(this.numerojoueur%3+1)%3+1;
             this.changement();
             this.a.setPassage(false);
             System.out.println("test");
-            /*for(int i=0;i<this.horizontal;i++){
-                for(int k=0;k<this.vertical;k++){
-                    this.a.TestVictoire(i, k);
-                }
-            }*/
         }
     }
 
@@ -350,6 +318,7 @@ public class Vue implements MouseListener {
 
     public void mouseReleased(MouseEvent e) {
     }
+    //On change la grille après une victoire
     public void changement(){
         this.battle.setText("1 VS 1");
         Changement.retirer(this.VueFenetre,this.zoneRouge,this.zoneJaune,this.zoneVert,this.numerojoueur);
@@ -360,7 +329,7 @@ public class Vue implements MouseListener {
         }
         Changement.afficher(this.VueFenetre);
     }
-
+    //On colorie un jeton en fonction de la situation de la grille
     public void colorier(Jeton jeton,int ligneNouveauJeton,int n){
         if(n==0){
             switch (this.numerojoueur) {
